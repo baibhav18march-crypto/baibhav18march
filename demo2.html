@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Accessories Gallery</title>
+  <style>
+    body {
+      background: #f8fafb;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .gallery-container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 18px;
+    }
+
+    .gallery-title {
+      text-align: center;
+      color: #233c53;
+      font-size: 2em;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+    }
+
+    .product-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px 16px;
+    }
+
+    .product-card {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1.5px 7px rgba(44,55,66,0.05);
+      display: flex;
+      flex-direction: column;
+      padding: 14px;
+      transition: box-shadow 0.2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 4px 16px rgba(32,102,228,0.12);
+    }
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 7px;
+      margin-bottom: 10px;
+      background: #e4eaf4;
+    }
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-grow: 1;
+    }
+    .product-name {
+      font-size: 1.15em;
+      font-weight: 500;
+      color: #224465;
+      margin-bottom: 3px;
+    }
+    .product-price {
+      font-size: 1.05em;
+      color: #2575c2;
+      font-weight: 600;
+    }
+    .product-description {
+      font-size: 0.98em;
+      color: #637993;
+      margin-top: 5px;
+      flex-grow: 1;
+    }
+
+    /* Tablet: 2 columns */
+    @media (max-width: 850px) {
+      .product-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Mobile: 1 column */
+    @media (max-width: 500px) {
+      .gallery-container {
+        padding: 8px;
+      }
+      .product-gallery {
+        grid-template-columns: 1fr;
+        gap: 14px 0;
+      }
+      .gallery-title {
+        font-size: 1.3em;
+      }
+      .product-card {
+        padding: 10px;
+      }
+    }
+    /* Shrink images for mobile */
+    @media (max-width: 400px) {
+      .product-image {
+        aspect-ratio: 1 / 1;
+        min-height: 120px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="gallery-container">
+    <div class="gallery-title">Accessories Product Gallery</div>
+    <div class="product-gallery">
+      <!-- Example Products -->
+      <div class="product-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/products/583x720/20883566a.webp" alt="Classic Watch" class="product-image">
+        <div class="product-info">
+          <span class="product-name">carlington watche</span>
+          <span class="product-price">₹1539</span>
+          <span class="product-description">A timeless analog wristwatch. Water resistant, stainless steel finish, and a one-year warranty.</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://levi.in/cdn/shop/files/0f8e67d7-733f-40fb-b281-a4bfbee89b491744201238438-Levis-Men-Leather-Belt-1261744201238167-1.jpg?v=1744697506&width=550" alt="Leather Belt" class="product-image">
+        <div class="product-info">
+          <span class="product-name">levis lether belt</span>
+          <span class="product-price">₹1349</span>
+          <span class="product-description">Durable and stylish, perfect for formal and casual wear. Adjustable size with premium buckle.</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/products/583x720/20303863a.webp" alt="Sunglasses" class="product-image">
+        <div class="product-info">
+          <span class="product-name">Ray-ban solid sunglasses</span>
+          <span class="product-price">₹3861</span>
+          <span class="product-description">Trendy polarized sunglasses providing 100% UV protection. Lightweight and comfortable.</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://sp.yimg.com/ib/th?id=OPAC.L8QD7%2bQ1vuf%2f9g474C474&o=5&pid=21.1&w=160&h=105" alt="Necklace Jewellery" class="product-image">
+        <div class="product-info">
+          <span class="product-name">caratlane-A Tata</span>
+          <span class="product-price">₹14960</span>
+          <span class="product-description">Elegant handcrafted design with natural gemstones; adds a touch of class to any outfit.</span>
+        </div>
+      </div>
+      <!-- Add more product-card divs as needed -->
+    </div>
+  </div>
+</body>
+</html>

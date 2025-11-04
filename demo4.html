@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+    <head>
+    <title>HTML Tables — Full</title>
+    </head>
+    <body>
+
+    <!-- This paragraph describes the table; aria-describedby references this for extra context -->
+    <p>
+        This table demonstrates all table-related elements and common attributes:
+        <code>&lt;table&gt;</code>, <code>&lt;caption&gt;</code>, <code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code>,
+        <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>, <code>&lt;tr&gt;</code>,
+        <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>, with <code>scope</code>, <code>colspan</code>, <code>rowspan</code>,
+        and header associations via <code>id</code>/<code>headers</code>.
+    </p>
+
+    <!-- FULL FEATURE TABLE -->
+    <table border="1">
+        <!-- CAPTION: a visible title that also aids screen readers -->
+        <caption>Weekly Schedule</caption>
+        <!-- COLGROUP/COL: define columns (styling optional) -->
+        <colgroup>
+        <col><!-- S.No column -->
+        <col><!-- Day Name column -->
+        <col><!-- Type column -->
+        <col><!-- Notes column -->
+        </colgroup>
+        <!-- THEAD: column headers; use scope="col" -->
+        <thead>
+        <tr>
+            <th id="h-sno"   scope="col" abbr="#" title="Serial Number">S.No</th>
+            <th id="h-name"  scope="col">Day</th>
+            <th id="h-type"  scope="col" colspan="2">Type</th>
+            <!-- Demonstrating a header that spans (kept 1 for clarity) -->
+        </tr>
+        </thead>
+        <!-- TBODY: data rows -->
+        <tbody>
+        <tr>
+            <!-- scope="row" labels this row; TDs link to column headers via headers="id" -->
+            <th scope="row">1</th>
+            <td headers="h-name">Monday</td>
+            <td headers="h-type">Weekday</td>
+            <td headers="h-notes">Team stand-up at 9:00 AM.</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td headers="h-name">Tuesday</td>
+            <td headers="h-type">Weekday</td>
+            <td headers="h-notes">Code review.</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td headers="h-name">Wednesday</td>
+            <td headers="h-type">Weekday</td>
+            <td headers="h-notes">Client demo; <em>Lunch &amp; Learn</em>.</td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td headers="h-name">Thursday</td>
+            <td headers="h-type">Weekday</td>
+            <td headers="h-notes">Database maintenance window (6–7 PM).</td>
+        </tr>
+        <tr>
+            <th scope="row">5</th>
+            <td headers="h-name">Friday</td>
+            <td headers="h-type">Weekday</td>
+            <td headers="h-notes">Sprint retrospective.</td>
+        </tr>
+        <!-- Demonstrate ROWSPAN: one note applies to Sat+Sun -->
+        <tr>
+            <th scope="row">6</th>
+            <td headers="h-name">Saturday</td>
+            <td headers="h-type">Weekend</td>
+            <td headers="h-notes" rowspan="2">
+            Family time / personal projects.
+            <!-- This cell uses rowspan="2" to cover two rows. -->
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">7</th>
+            <td headers="h-name">Sunday</td>
+            <td headers="h-type">Weekend</td>
+            <!-- No <td> here because the above cell spans into this row -->
+        </tr>
+        </tbody>
+        <!-- TFOOT: summary row (appears last in markup, rendered at bottom) -->
+        <tfoot>
+        <tr>
+            <!-- Demonstrate COLSPAN across all columns -->
+            <td colspan="4">Summary: 5 weekdays, 2 weekend days. Total rows: 7.</td>
+        </tr>
+        </tfoot>
+    </table>
+    </body>
+</html>

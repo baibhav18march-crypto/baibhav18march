@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Registration Form</title>
+<style>
+  /* Basic Reset */
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0c1b6e;
+    margin: 2rem;
+    color: #950b0b;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 650;
+    color: #ca1111;
+  }
+
+  form {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 14px rgba(11, 129, 150, 0.1);
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: 1fr;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    position: relative;
+  }
+
+  /* Add asterisk for required fields using pseudo-element */
+  label.required::after {
+    content: "*";
+    color: #e74c3c;
+    margin-left: 4px;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  /* Focus effect */
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  select:focus {
+    border-color: #2980b9;
+    outline: none;
+    box-shadow: 0 0 6px #2980b9aa;
+  }
+
+  /* Hover effect */
+  input[type="text"]:hover,
+  input[type="email"]:hover,
+  select:hover {
+    border-color: #3498db;
+  }
+
+  /* Preferences group styling */
+  .preferences {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0.6rem 0;
+  }
+
+  .preferences label {
+    font-weight: normal;
+    cursor: pointer;
+    position: relative;
+    padding-left: 24px;
+  }
+
+  /* Custom checkbox style */
+  .preferences input[type="checkbox"] {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  /* Checkbox hover effect */
+  .preferences input[type="checkbox"]:hover + span::before {
+    border-color: #8e1818;
+  }
+
+  /* Checkbox box styling using span and pseudo-elements */
+  .preferences span::before {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #dc1212;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    background: rgb(222, 14, 14);
+    transition: border-color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  }
+
+  /* Show checkmark when checked */
+  .preferences input[type="checkbox"]:checked + span::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 7px;
+    width: 6px;
+    height: 12px;
+    border: solid #790824;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+  }
+
+  .preferences input[type="checkbox"]:checked + span::before {
+    border-color: #9e0b2d;
+    background-color: #a30b0b;
+  }
+
+  /* Button Styling */
+  button {
+    background-color: #d31212;
+    border: none;
+    padding: 0.75rem 1rem;
+    color: rgb(206, 16, 16);
+    font-size: 1.1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+  }
+
+  button:hover {
+    background-color: #3498db;
+  }
+
+  button:focus {
+    outline: 3px solid #2980b9cc;
+    outline-offset: 2px;
+  }
+  
+</style>
+</head>
+<body>
+
+<h2>Community Event Registration</h2>
+
+<form>
+  <label for="name" class="required">Full Name</label>
+  <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+
+  <label for="email" class="required">Email Address</label>
+  <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+  <label for="attendance" class="required">Attendance Type</label>
+  <select id="attendance" name="attendance" required>
+    <option value="" disabled selected>Select an option</option>
+    <option value="inperson">In Person</option>
+    <option value="virtual">Virtual</option>
+  </select>
+
+  <fieldset class="preferences-group">
+    <legend>Event Preferences</legend>
+    <div class="preferences">
+      <label><input type="checkbox" name="preferences" value="newsletter" /><span> Subscribe to newsletter</span></label>
+      <label><input type="checkbox" name="preferences" value="reminders" /><span> Receive event reminders</span></label>
+      <label><input type="checkbox" name="preferences" value="volunteer" /><span> Volunteer for event setup</span></label>
+    </div>
+  </fieldset>
+
+  <button type="submit">Register</button>
+</form>
+
+</body>
+</html>

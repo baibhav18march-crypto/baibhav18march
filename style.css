@@ -1,0 +1,17 @@
+.exterstyle{
+  background-color:rgb(0, 0, 0);
+  border: solid orange;
+  color: rgb(255, 0, 0);
+}
+h1{
+  text-decoration: red wavy underline;
+}
+.interstyle{
+  height: 50px;
+}
+.inline{
+  height: 50px;
+  background-color: lightgreen;
+  border: solid cyan;
+  color: green;
+}
