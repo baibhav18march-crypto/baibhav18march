@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name – Front-End Developer | UI Engineer</title>
+    <link rel="stylesheet" href="./style.css" />
+  <style>
+    :root {
+      --primary: #2937f0;
+      --accent: #ffc86b;
+      --bg: #0a0a0b;
+      --card: #b1ced9;
+      --border: #0a0b0b;
+      --text-main: #222;
+      --text-muted: #888;
+      --radius: 8px;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 510px;
+      margin: 40px auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 12px rgba(60,80,160,.08);
+      padding: 32px 24px 24px 24px;
+      border: 1px solid var(--border);
+    }
+    .profile-photo {
+      display: block;
+      margin: 0 auto 16px auto;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(44,62,80,.10);
+      border: 2px solid var(--primary);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2em;
+      letter-spacing: -1px;
+    }
+    .role {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .desc {
+      font-size: 1.07em;
+      margin-bottom: 18px;
+    }
+    nav a {
+      display: inline-block;
+      margin: 4px 12px 12px 0;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 500;
+      background: var(--bg);
+      padding: 7px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      transition: background .17s;
+    }
+    nav a:hover {
+      background: var(--accent);
+      color: #222;
+    }
+    .section-heading {
+      font-size: 1.13em;
+      margin: 32px 0 12px 0;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    ul.key-skills, ul.highlights {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+    .contact {
+      margin-top: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      font-size: .95em;
+      color: var(--text-muted);
+    }
+    .contact span {
+      display: inline-block;
+      min-width: 50px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px 8px;
+        margin: 20px auto;
+      }
+      h1 { font-size: 1.36em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="profile-photo" src="image.png.png" alt="Baibhav kumar Profile Photo">
+    <h1>Your Name</h1>
+    <div class="role">Front-End Developer • UI Engineer</div>
+    <div class="desc">
+      I craft clean, accessible interfaces and design systems.<br>
+      Passionate about <b>performance</b>, <b>animations</b>, and delightful <b>UX</b>.
+    </div>
+    <nav>
+      <a href="your-cv-link.pdf" download>Download CV</a>
+      <a href="mailto:you@example.com">Contact Me</a>
+      <a href="https://linkedin.com/in/your-link" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/yourgithub" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://twitter.com/yourtwitter" target="_blank" rel="noopener">Twitter</a>
+    </nav>
+    <div class="section-heading">About Me</div>
+    <div>
+      I specialize in building <b>component-driven UIs</b> with HTML, CSS/SCSS &amp; modern JavaScript.<br>
+      I value <b>semantics</b>, <b>accessibility (A11y)</b>, and maintainable architecture.
+    </div>
+    <div class="section-heading">Key Skills</div>
+    <ul class="key-skills">
+      <li>Semantic HTML</li>
+      <li>Responsive CSS Grid/Flex</li>
+      <li>SCSS & Design Tokens</li>
+      <li>Accessibility</li>
+      <li>Animations & Transitions</li>
+      <li>Performance</li>
+    </ul>
+    <div class="section-heading">Highlights</div>
+    <ul class="highlights">
+      <li>Shipped design system components for multiple products</li>
+      <li>Improved Core Web Vitals (LCP + CLS) across 3 web apps</li>
+      <li>Mentored teams on CSS architecture and A11y best practices</li>
+    </ul>
+    <div class="contact">
+      <div><span>Email:</span> baibhav18march@gmail.com</div>
+      <div><span>Location:</span> vijayawada, India</div>
+      <div><span>Open to:</span> Front-end roles, UI engineering, design systems</div>
+    </div>
+    <div style="margin-top:24px;color:var(--text-muted);font-size:.9em;">
+      © 2025 Your Name — Crafted with HTML &amp; CSS
+    </div>
+  </div>
+</body>
+</html>

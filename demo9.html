@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./login.css" />
+</head>
+<body>
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <!-- Left hero -->
+    <section class="hero">
+      <h1>Welcome Back!</h1>
+      <p>Access and manage your task efficiently</p>
+    </section>
+
+    <!-- Right login card -->
+    <section class="card">
+      <h2 class="card-title">Login</h2>
+
+      <form class="form" action="#" method="post" novalidate>
+        <label class="sr-only" for="email">Email</label>
+        <input id="email" type="email" placeholder="Email" required />
+
+        <label class="sr-only" for="password">Password</label>
+        <input id="password" type="password" placeholder="Password" required />
+
+        <button class="btn" type="submit">Login</button>
+
+        <p class="muted">
+          Don’t have an account?
+          <a href="#" class="link">Sign Up</a>
+        </p>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
