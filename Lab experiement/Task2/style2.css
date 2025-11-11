@@ -10,7 +10,7 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
-      background-color: #7cc312;
+      background-color: darkcyan;
     }
 
     /* Page title */
@@ -58,6 +58,7 @@
     .product-name {
       font-size: 1.2em;
       margin: 0 0 10px;
+      color: antiquewhite;
     }
 
     /* Product price */
