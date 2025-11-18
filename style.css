@@ -15,3 +15,14 @@ h1{
   border: solid cyan;
   color: green;
 }
+section, main {
+  height: 100vh;        /* full screen height */
+  width: 100%;          /* full width */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s ease-in-out; /* smooth slide */
+}
+section.hidden {
+  transform: translateX(100%); /* slide out to the right */
+}

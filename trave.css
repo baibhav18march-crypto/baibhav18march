@@ -1,0 +1,281 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background: #fafafa;
+}
+
+/* Header & Navigation */
+header {
+  background: #004d40;
+  color: #fff;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #ffcc80;
+}
+
+/* Hero Section */
+#home {
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e") center/cover no-repeat;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+#home h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+#home p {
+  font-size: 1.2rem;
+  max-width: 600px;
+}
+
+/* Posts Section */
+#posts {
+  padding: 3rem 2rem;
+  background: #fff;
+}
+
+#posts h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #004d40;
+}
+
+article {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+article h3 {
+  color: #00695c;
+  margin-bottom: 0.5rem;
+}
+
+article footer a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #004d40;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+article footer a:hover {
+  text-decoration: underline;
+}
+
+/* Itinerary */
+#itinerary {
+  background: #e0f2f1;
+  padding: 3rem 2rem;
+}
+
+#itinerary h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #004d40;
+}
+
+#itinerary div {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #fff;
+  border-left: 4px solid #004d40;
+  border-radius: 6px;
+}
+
+/* Gallery */
+#gallery {
+  padding: 3rem 2rem;
+  background: #fff;
+}
+
+#gallery h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #004d40;
+}
+
+#gallery figure {
+  display: inline-block;
+  margin: 1rem;
+  text-align: center;
+}
+
+#gallery img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+#gallery img:hover {
+  transform: scale(1.05);
+}
+
+#gallery figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* About */
+#about {
+  background: #f1f8e9;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+#about h2 {
+  margin-bottom: 1rem;
+  color: #33691e;
+}
+
+#about p {
+  max-width: 600px;
+  margin: auto;
+  font-size: 1.1rem;
+}
+
+/* Contact / Subscribe */
+#contact {
+  padding: 3rem 2rem;
+  background: #fff;
+}
+
+#contact h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #004d40;
+}
+
+form {
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form label {
+  font-weight: bold;
+  color: #333;
+}
+
+form input, form textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+form button {
+  padding: 0.8rem;
+  background: #004d40;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #00695c;
+}
+
+/* Footer */
+footer {
+  background: #004d40;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+footer nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+footer nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer nav ul li a:hover {
+  color: #ffcc80;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #home h1 {
+    font-size: 2rem;
+  }
+
+  #gallery img {
+    width: 100%;
+    height: auto;
+  }
+}
