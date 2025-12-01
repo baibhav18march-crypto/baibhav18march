@@ -1,0 +1,49 @@
+/* style6.css */
+body {
+  background: #165f56;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  padding: 30px;
+  background: #2f9f89;
+  max-width: 400px;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.message {
+  margin-top: 25px;
+  padding: 15px;
+  font-size: 1.3em;
+  border-radius: 10px;
+  background: #132e3f;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.6s cubic-bezier(.68,-0.55,.27,1.55), transform 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Visible state for message */
+.message.show {
+  opacity: 1;
+  transform: scale(1.05);
+  animation: pop-in 0.6s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Animation keyframes */
+@keyframes pop-in {
+  0%   { opacity: 0; transform: scale(0.8); }
+  75%  { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+button {
+  padding: 12px 25px;
+  font-size: 1em;
+  color: #fff;
+  background: #0b3d34;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
