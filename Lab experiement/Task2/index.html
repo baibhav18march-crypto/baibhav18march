@@ -3,78 +3,259 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Responsive Product Gallery</title>
-  <link rel="stylesheet" href="style2.css" />
+  <title>Accessory Gallery</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-muted: #6b7280;
+      --accent: #2563eb;
+      --accent-soft: #e0edff;
+      --radius-lg: 18px;
+      --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.2);
+    }
 
- 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text-main);
+      padding: 32px 16px 40px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    #gallery-title {
+      color: #f9fafb;
+      font-size: clamp(1.9rem, 4vw, 2.4rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 45px rgba(15, 23, 42, 0.28);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+
+    .product-info {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .product-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+
+    .product-price {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-soft);
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-top: 2px;
+    }
+
+    .product-description {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding-top: 24px;
+      }
+      .product-image {
+        height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <h1 id="gallery-title">Accessory Gallery</h1>
+  </header>
 
-  <!-- Page heading -->
-  <h1>Accessory Gallery</h1>
+  <main>
+    <section
+      class="gallery"
+      aria-labelledby="gallery-title"
+      role="list">
 
-  <!-- Product gallery container -->
-  <div class="gallery">
+      <!-- Product card 1 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/079314/01/fnd/IND/fmt/png/Style-l-Wallet"
+          alt="Puma Style l wallet in dark color"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Style l Wallet</h2>
+          <p class="product-price" aria-label="Price 1,169 dollars">$1,169</p>
+          <p class="product-description">
+            Tailored with premium materials for daily comfort and style.
+          </p>
+        </div>
+      </article>
 
-    <!-- Product card 1 -->
-    <div class="product-card">
-      <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/079314/01/fnd/IND/fmt/png/Style-l-Wallet" alt="Style l Wallet" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">Style l wallet Wallet</h2>
-        <p class="product-price">$1,169</p>
-        <p class="product-description">Tailored with good quality materia</p>
-      </div>
-    </div>
+      <!-- Product card 2 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://objects-prod.cdn.chopard.com/q_auto,f_auto,dpr_2/e_trim/w_iw,h_ih,c_lpad,g_center/c_pad,ar_1:1,w_1490,e_sharpen:60/ProductsAssets/Web/168566-3007_01.png"
+          alt="Mille Miglia GTS Power Control watch with dark strap"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Mille Miglia GTS Power Control</h2>
+          <p class="product-price">$1,015</p>
+          <p class="product-description">
+            Crafted to follow the natural curve of the wrist for a perfect fit.
+          </p>
+        </div>
+      </article>
 
-    <!-- Product card 2 -->
-    <div class="product-card">
-      <img src="https://objects-prod.cdn.chopard.com/q_auto,f_auto,dpr_2/e_trim/w_iw,h_ih,c_lpad,g_center/c_pad,ar_1:1,w_1490,e_sharpen:60/ProductsAssets/Web/168566-3007_01.png" alt="Mille Miglia GTS Power Control Grigio Speciale" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">Mille Miglia GTS Power Control Grigio Speciale</h2>
-        <p class="product-price">$1015</p>
-        <p class="product-description">Crafted to mould the curve of the wrist to perfection</p>
-      </div>
-    </div>
+      <!-- Product card 3 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://rukminim2.flixcart.com/image/612/612/xif0q/sunglass/f/2/7/55-aviator-black-pol-sunglassy-original-imahd6m79scadhbc.jpeg?q=70"
+          alt="Black polarized aviator sunglasses"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Aviator Sunglasses</h2>
+          <p class="product-price">$12</p>
+          <p class="product-description">
+            Polarized UV‑protection aviators in classic black for men.
+          </p>
+        </div>
+      </article>
 
-    <!-- Product card 3 -->
-    <div class="product-card">
-      <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/sunglass/f/2/7/55-aviator-black-pol-sunglassy-original-imahd6m79scadhbc.jpeg?q=70" alt="Sunglasses" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">Sunglasses</h2>
-        <p class="product-price">$12</p>
-        <p class="product-description">Polarized, UV Protection Aviator Sunglasses (Free Size)  (For Men, Black)</p>
-      </div>
-    </div>
+      <!-- Product card 4 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://rukminim2.flixcart.com/image/612/612/xif0q/bangle-bracelet-armlet/m/f/e/-original-imahfsrac9nqsy4z.jpeg?q=70"
+          alt="Brown and black leather bracelet set"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Leather Bracelet Set</h2>
+          <p class="product-price">$500</p>
+          <p class="product-description">
+            Stackable leather bands crafted for a rugged everyday look.
+          </p>
+        </div>
+      </article>
 
-    <!-- Product card 4 -->
-    <div class="product-card">
-      <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/bangle-bracelet-armlet/m/f/e/-original-imahfsrac9nqsy4z.jpeg?q=70" alt="leather braclet set" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">leather braclet set</h2>
-        <p class="product-price">$500</p>
-        <p class="product-description">Crafted from high-quality leather,</p>
-      </div>
-    </div>
-    <!-- Product card 5 -->
-    <div class="product-card">
-      <img src="https://www.milton.in/cdn/shop/files/51ujOnvWc_L._SL1500.jpg?v=1736933552&width=620" alt="Minimate Thermosteel Water Bottle (Milton)" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">Minimate Thermosteel Water Bottle (Milton)</h2>
-        <p class="product-price">$200</p>
-        <p class="product-description"> Minimate suitable hydration parter during all times of the year,</p>
-      </div>
-    </div>
-    <!-- Product card 6 -->
-    <div class="product-card">
-      <img src="https://cdn.fcglcdn.com/brainbees/images/products/583x720/19670692a.webp" alt="Storite Canvas Sling Bag For Men" class="product-image" />
-      <div class="product-info">
-        <h2 class="product-name">Storite Canvas Sling Bag For Men</h2>
-        <p class="product-price">$400</p>
-        <p class="product-description">Travel Office Business Satchel Messenger One Side Shoulder Bag</p>
-      </div>
-    </div>
+      <!-- Product card 5 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://www.milton.in/cdn/shop/files/51ujOnvWc_L._SL1500.jpg?v=1736933552&width=620"
+          alt="Silver Minimate Thermosteel bottle by Milton"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Minimate Thermosteel Bottle</h2>
+          <p class="product-price">$200</p>
+          <p class="product-description">
+            Hydration partner that keeps drinks hot or cold for long hours.
+          </p>
+        </div>
+      </article>
 
-  </div> <!-- End of gallery -->
+      <!-- Product card 6 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://cdn.fcglcdn.com/brainbees/images/products/583x720/19670692a.webp"
+          alt="Brown Storite canvas sling bag"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Storite Canvas Sling Bag</h2>
+          <p class="product-price">$400</p>
+          <p class="product-description">
+            Compact sling bag ideal for travel, office, or daily commuting.
+          </p>
+        </div>
+      </article>
 
+      <!-- Product card 7 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://tse4.mm.bing.net/th/id/OIP.l0m4cYSK3dfcQgbAIspuywHaHK?pid=Api&P=0&h=180"
+          alt="Black leather AirTag key ring"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Leather Key Ring</h2>
+          <p class="product-price">$45</p>
+          <p class="product-description">
+            Minimal key ring with premium leather loop and secure metal clasp.
+          </p>
+        </div>
+      </article>
+
+      <!-- Product card 8 -->
+      <article class="product-card" role="listitem">
+        <img
+          src="https://m.media-amazon.com/images/I/71GChZ2dtTL._AC_SL1500_.jpg"
+          alt="Purple true wireless earbuds in charging case"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h2 class="product-name">Wireless Earbuds</h2>
+          <p class="product-price">$120</p>
+          <p class="product-description">
+            Compact noise‑isolating earbuds with all‑day battery and fast charging.
+          </p>
+        </div>
+      </article>
+
+    </section>
+  </main>
 </body>
 </html>

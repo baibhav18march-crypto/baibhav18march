@@ -1,5 +1,5 @@
 /* style.css — Modern responsive stylesheet for your links page
-   - Drop into the same folder as your HTML as "tp.css"
+   - Drop into the same folder as your HTML as "style.css"
    - Styles anchors into a clean responsive navigation grid
    - Accessible focus states, hover effects, color vars for easy customization
 */
@@ -143,6 +143,18 @@ a[target="_blank"]::after{content:"\00a0↗";font-size:12px;color:var(--muted)}
   :root{--bg:#f6f8fb;--card:#ffffff;--text:#0f172a;--muted:#6b7280}
   body{background:var(--bg);color:var(--text)}
   .links-grid a{background:var(--card);border-color:rgba(2,6,23,0.04);box-shadow: 0 6px 20px rgba(9,10,13,0.04)}
+.links-grid a{
+  display: flex;
+  flex-direction: column;   /* stack content vertically */
+  align-items: flex-start;  /* left-align text inside card */
+  gap: 8px;                 /* small gap between icon/title/subtitle */
+  padding: 18px;
+}
+.links-grid a::before{
+  margin-bottom: 6px; /* separate the decorative badge from the text */
+  align-self: center; /* keep badge centered horizontally */
+}
+.links-grid a .title{ white-space: normal; } /* allow wrapping for title */
 }
 
 /* End of stylesheet */
