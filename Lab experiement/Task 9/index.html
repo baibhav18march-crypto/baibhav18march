@@ -1,391 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Smart Weather</title>
+  <meta charset="UTF-8" />
+  <title>Responsive Info Cards</title>
+
   <style>
-    :root{
-      --bg1:#0f7a53;
-      --bg2:#1ea56f;
-      --card:#133a2c;
-      --text:#eaf8f1;
-      --muted:#bfe7d7;
-      --accent:#ffd54a;
-      --accent-hover:#ffc926;
-      --danger:#ff6b6b;
+    /* =========================
+       TOKENS
+       ========================= */
+    :root {
+      --bg: #020617;
+      --bg-accent: #0f172a;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card-bg: rgba(15, 23, 42, 0.9);
+      --card-border: rgba(148, 163, 184, 0.4);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.18);
+      --radius-lg: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.9);
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.5rem;
+      --space-6: 2rem;
+      --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
-    *{box-sizing:border-box}
-    html,body{
-      height:100%;
-      margin:0;
-      font-family:system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,Arial,sans-serif;
-      color:var(--text);
-      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+
+    /* =========================
+       BASE
+       ========================= */
+    * , *::before, *::after {
+      box-sizing: border-box;
     }
-    .wrap{
-      min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-base);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, #38bdf8 0, transparent 55%),
+        radial-gradient(circle at 100% 0%, #e879f9 0, transparent 55%),
+        radial-gradient(circle at 0% 100%, #22c55e 0, transparent 55%),
+        linear-gradient(135deg, var(--bg-accent), var(--bg)); /* multi‑radial “mesh” style gradient[web:83][web:87] */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: var(--space-6) var(--space-4);
     }
-    .card{
-      width:100%;
-      max-width:720px;
-      background:rgba(19,58,44,0.9);
-      border-radius:18px;
-      box-shadow:0 18px 50px rgba(0,0,0,0.35);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,0.08);
+
+    h1, h2 {
+      margin: 0;
+      font-weight: 700;
     }
-    .header{
-      padding:24px 24px 8px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+
+    p {
+      margin: 0;
     }
-    .title{
-      font-weight:700;
-      font-size:22px;
-      letter-spacing:0.2px;
+
+    /* =========================
+       LAYOUT
+       ========================= */
+    .page {
+      max-width: 1100px;
+      width: 100%;
     }
-    .subtitle{
-      font-size:13px;
-      color:var(--muted);
+
+    .page-header {
+      margin-bottom: var(--space-5);
     }
-    .search{
-      padding:16px 24px 24px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:12px;
+
+    .page-title {
+      font-size: 2.1rem;
     }
-    .search input{
-      width:100%;
-      padding:14px 16px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,0.15);
-      background:rgba(255,255,255,0.06);
-      color:var(--text);
-      outline:none;
-      font-size:16px;
+
+    .page-subtitle {
+      margin-top: var(--space-2);
+      font-size: 0.95rem;
     }
-    .search input::placeholder{color:rgba(234,248,241,0.7)}
-    .search input:focus{
-      border-color:var(--accent);
-      box-shadow:0 0 0 1px rgba(255,213,74,0.45);
+
+    .card-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     }
-    .search button{
-      padding:14px 18px;
-      border:none;
-      border-radius:12px;
-      background:var(--accent);
-      color:#172016;
-      font-weight:700;
-      font-size:16px;
-      cursor:pointer;
-      transition:transform 0.06s ease, background 0.18s ease, opacity 0.15s ease;
+
+    @media (max-width: 600px) {
+      body {
+        padding-inline: var(--space-3);
+      }
     }
-    .search button:active{transform:translateY(1px)}
-    .search button:hover{background:var(--accent-hover)}
-    .search button:disabled{
-      opacity:0.6;
-      cursor:not-allowed;
-      transform:none;
+
+    /* =========================
+       COMPONENTS
+       ========================= */
+    .card {
+      background:
+        radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.09), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.18), transparent 55%),
+        var(--card-bg);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-soft);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 160ms ease-out,
+        box-shadow 180ms ease-out,
+        border-color 160ms ease-out;
     }
-    .content{
-      padding:0 24px 24px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 10% -10%, rgba(248, 250, 252, 0.2), transparent 55%);
+      opacity: 0;
+      transition: opacity 220ms ease-out;
+      pointer-events: none;
     }
-    .location{
-      display:flex;
-      align-items:baseline;
-      gap:8px;
-      flex-wrap:wrap;
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.95);
+      border-color: rgba(56, 189, 248, 0.7);
     }
-    .location .name{
-      font-size:20px;
-      font-weight:600;
+
+    .card:hover::before {
+      opacity: 1;
     }
-    .location .meta{
-      font-size:13px;
-      color:var(--muted);
+
+    .card-title {
+      font-size: 1.1rem;
     }
-    .location .temp{
-      margin-left:auto;
-      font-size:26px;
-      font-weight:700;
+
+    .card-body {
+      font-size: 0.9rem;
     }
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
+
+    .btn {
+      align-self: flex-start;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--accent);
+      padding: 0.45rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      background-color: var(--accent);
+      color: #0f172a;
+      box-shadow: 0 10px 26px rgba(56, 189, 248, 0.55);
+      transition:
+        background-color 140ms ease-out,
+        transform 120ms ease-out,
+        box-shadow 150ms ease-out;
     }
-    .item{
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.1);
-      border-radius:14px;
-      padding:14px;
+
+    .btn:hover {
+      background-color: #0ea5e9;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(56, 189, 248, 0.65);
     }
-    .label{
-      font-size:13px;
-      color:var(--muted);
-      letter-spacing:0.3px;
-      text-transform:uppercase;
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--accent);
+      box-shadow: none;
     }
-    .value{
-      margin-top:4px;
-      font-size:16px;
-      font-weight:600;
+
+    .btn-outline:hover {
+      background-color: var(--accent-soft);
     }
-    .advice{
-      margin-top:8px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.1);
-      padding:14px;
-      border-radius:14px;
-      font-size:15px;
-      line-height:1.5;
+
+    /* Collapsible header + button */
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-3);
     }
-    .status{
-      padding:10px 14px;
-      font-size:14px;
-      border-left:4px solid var(--accent);
-      background:rgba(255,255,255,0.06);
-      border-radius:10px;
+
+    .card-toggle {
+      border-radius: var(--radius-pill);
+      border: 1px solid transparent;
+      padding: 0.25rem 0.7rem;
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      transition:
+        background-color 140ms ease-out,
+        border-color 140ms ease-out,
+        transform 100ms ease-out;
     }
-    .status strong{font-weight:600;}
-    .error{
-      border-left-color:var(--danger);
-      color:#ffecec;
+
+    .card-toggle::after {
+      content: "▾";
+      font-size: 0.7rem;
+      transition: transform 160ms ease-out;
     }
-    .sr-only{
-      position:absolute!important;
-      height:1px;width:1px;overflow:hidden;
-      clip:rect(1px,1px,1px,1px);
-      white-space:nowrap;border:0;padding:0;margin:-1px;
+
+    .card-toggle[aria-expanded="true"]::after {
+      transform: rotate(-180deg);
     }
-    @media (max-width:560px){
-      .grid{grid-template-columns:1fr}
-      .location .temp{margin-left:0}
+
+    .card-toggle:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Collapsible panel animation */
+    .card-body-wrapper {
+      overflow: hidden;
+      transition: max-height 200ms ease-out;
+    }
+
+    /* =========================
+       UTILITIES
+       ========================= */
+    .muted {
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <main class="wrap">
-    <section class="card" aria-labelledby="title">
-      <div class="header">
-        <div>
-          <h1 id="title" class="title">Weather</h1>
-          <p class="subtitle">Live data via Open‑Meteo (no API key)</p>
+  <main class="page">
+    <header class="page-header">
+      <h1 class="page-title">Responsive Info Cards</h1>
+      <p class="page-subtitle muted">
+        Example of clean, maintainable cards with smooth collapsible details.
+      </p>
+    </header>
+
+    <section class="card-grid">
+      <!-- 1 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Performance</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-1"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-1" hidden>
+          <p class="card-body muted">
+            Optimize loading, painting, and interactivity to keep pages fast on all devices.
+          </p>
+          <button class="btn">Learn more</button>
         </div>
-      </div>
+      </article>
 
-      <form class="search" id="searchForm" autocomplete="off" role="search" aria-label="Search for a city">
-        <label for="q" class="sr-only">City or place</label>
-        <input
-          id="q"
-          name="q"
-          type="text"
-          placeholder="City or place (e.g., Melbourne, London, Delhi)"
-          required
-          inputmode="search"
-        />
-        <button type="submit" id="submitBtn" aria-label="Check weather">Check</button>
-      </form>
+      <!-- 2 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Accessibility</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-2"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-2" hidden>
+          <p class="card-body muted">
+            Use semantic HTML, ARIA, and color contrast to reach every user.
+          </p>
+          <button class="btn btn-outline">Read guide</button>
+        </div>
+      </article>
 
-      <div class="content" id="content" aria-live="polite">
-        <p class="status">
-          <strong>Tip:</strong> Type a city name and press <em>Check</em> to see temperature, wind, humidity and more.
-        </p>
-      </div>
+      <!-- 3 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Design Systems</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-3"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-3" hidden>
+          <p class="card-body muted">
+            Reusable tokens and components keep products consistent and scalable.
+          </p>
+          <button class="btn">Explore</button>
+        </div>
+      </article>
+
+      <!-- 4 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Animations</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-4"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-4" hidden>
+          <p class="card-body muted">
+            Use subtle motion to guide focus without hurting performance.
+          </p>
+          <button class="btn btn-outline">See examples</button>
+        </div>
+      </article>
+
+      <!-- 5 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Testing</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-5"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-5" hidden>
+          <p class="card-body muted">
+            Automated tests catch regressions in layout, color, and behavior.
+          </p>
+          <button class="btn">Start now</button>
+        </div>
+      </article>
+
+      <!-- 6 -->
+      <article class="card">
+        <header class="card-header">
+          <h2 class="card-title">Documentation</h2>
+          <button
+            class="card-toggle"
+            aria-expanded="false"
+            aria-controls="card-body-6"
+          >
+            Details
+          </button>
+        </header>
+        <div class="card-body-wrapper" id="card-body-6" hidden>
+          <p class="card-body muted">
+            Clear docs describe usage, constraints, and code patterns for the team.
+          </p>
+          <button class="btn btn-outline">View docs</button>
+        </div>
+      </article>
     </section>
   </main>
 
   <script>
-    const content = document.getElementById('content');
-    const form = document.getElementById('searchForm');
-    const input = document.getElementById('q');
-    const submitBtn = document.getElementById('submitBtn');
+    // Accessible disclosure pattern with aria-expanded[web:46][web:58]
+    const toggles = document.querySelectorAll(".card-toggle");
 
-    // Open‑Meteo weather code → text + emoji [web:21][web:22]
-    const weatherCodeMap = {
-      0:{t:'Clear sky',e:'☀️'},
-      1:{t:'Mainly clear',e:'🌤️'},
-      2:{t:'Partly cloudy',e:'⛅'},
-      3:{t:'Overcast',e:'☁️'},
-      45:{t:'Fog',e:'🌫️'},
-      48:{t:'Rime fog',e:'🌫️'},
-      51:{t:'Light drizzle',e:'🌦️'},
-      53:{t:'Drizzle',e:'🌦️'},
-      55:{t:'Heavy drizzle',e:'🌧️'},
-      61:{t:'Light rain',e:'🌦️'},
-      63:{t:'Rain',e:'🌧️'},
-      65:{t:'Heavy rain',e:'🌧️'},
-      66:{t:'Freezing rain',e:'🌨️'},
-      67:{t:'Heavy freezing rain',e:'🌨️'},
-      71:{t:'Light snow',e:'❄️'},
-      73:{t:'Snow',e:'❄️'},
-      75:{t:'Heavy snow',e:'❄️'},
-      77:{t:'Snow grains',e:'❄️'},
-      80:{t:'Rain showers',e:'🌦️'},
-      81:{t:'Rain showers',e:'🌦️'},
-      82:{t:'Heavy showers',e:'🌧️'},
-      85:{t:'Snow showers',e:'🌨️'},
-      86:{t:'Heavy snow showers',e:'🌨️'},
-      95:{t:'Thunderstorm',e:'⛈️'},
-      96:{t:'Thunderstorm, hail',e:'⛈️'},
-      99:{t:'Thunderstorm, hail',e:'⛈️'}
-    };
+    toggles.forEach((btn) => {
+      const panelId = btn.getAttribute("aria-controls");
+      const panel = document.getElementById(panelId);
 
-    // Convert degrees → 16‑point compass direction [web:41][web:45]
-    function degToCompass(deg){
-      const dirs=['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-      const ix=Math.round(deg/22.5)%16;
-      return dirs[ix];
-    }
+      // initial collapsed state
+      btn.setAttribute("aria-expanded", "false");
+      panel.hidden = true;
+      panel.style.maxHeight = "0";
 
-    // Format local ISO string to something nicer
-    function fmtLocalISO(dtStr){
-      if(!dtStr) return '–';
-      return dtStr.replace('T',' · ');
-    }
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        const next = !expanded;
+        btn.setAttribute("aria-expanded", String(next));
 
-    async function geocodePlace(q){
-      const url = new URL('https://geocoding-api.open-meteo.com/v1/search'); // [web:26][web:42]
-      url.searchParams.set('name', q);
-      url.searchParams.set('count', '1');
-      url.searchParams.set('language', 'en');
-      url.searchParams.set('format', 'json');
-
-      const res = await fetch(url);
-      if(!res.ok) throw new Error('Geocoding failed. Please try again.');
-      const data = await res.json();
-      if(!data.results || data.results.length === 0){
-        throw new Error('No matching place found. Try another name or spelling.');
-      }
-      const r = data.results[0];
-      return {
-        name: r.name,
-        country: r.country,
-        lat: r.latitude,
-        lon: r.longitude,
-        timezone: r.timezone
-      };
-    }
-
-    async function getWeather(lat, lon, timezone){
-      const url = new URL('https://api.open-meteo.com/v1/forecast');        // [web:21][web:22][web:31]
-      url.searchParams.set('latitude', String(lat));
-      url.searchParams.set('longitude', String(lon));
-      url.searchParams.set('current', 'temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,apparent_temperature');
-      url.searchParams.set('timezone', timezone);
-
-      const res = await fetch(url);
-      if(!res.ok) throw new Error('Weather fetch failed. Please try again.');
-      const data = await res.json();
-      const c = data.current;
-      if(!c) throw new Error('No current weather data available for this location.');
-      return {
-        temperature: c.temperature_2m,
-        feelsLike: c.apparent_temperature,
-        humidity: c.relative_humidity_2m,
-        weatherCode: c.weather_code,
-        windSpeed: c.wind_speed_10m,
-        windDirection: c.wind_direction_10m,
-        time: c.time
-      };
-    }
-
-    function renderStatus(msg, isError=false){
-      content.innerHTML = `<p class="status ${isError?'error':''}">${msg}</p>`;
-    }
-
-    function buildAdvice(w){
-      if(w.temperature <= 10) return 'It is quite cold. Wear warm layers and a jacket if you are going out.';
-      if(w.temperature >= 32) return 'Very hot conditions. Drink plenty of water and avoid peak sun hours.';
-      if(w.humidity >= 80 && w.temperature >= 25) return 'It feels humid and warm. Light, breathable clothes are recommended.';
-      if(w.weatherCode >= 80 && w.weatherCode <= 82) return 'Showers are likely. Carry an umbrella or a light raincoat.';
-      if(w.weatherCode >= 61 && w.weatherCode <= 67) return 'Rain expected. Roads may be slippery, so travel carefully.';
-      return 'Weather looks comfortable. Still, check any local alerts if you plan long trips.';
-    }
-
-    function renderWeather(place, w){
-      const wc = weatherCodeMap[w.weatherCode] || {t:'Unknown', e:'❓'};
-      const cardinal = degToCompass(w.windDirection);
-      const advice = buildAdvice(w);
-
-      content.innerHTML = `
-        <div class="location">
-          <div>
-            <div class="name">${place.name}, ${place.country}</div>
-            <div class="meta">Lat ${place.lat.toFixed(2)}, Lon ${place.lon.toFixed(2)}</div>
-          </div>
-          <div class="temp">${Math.round(w.temperature)}°C</div>
-        </div>
-
-        <div class="grid" role="list">
-          <div class="item" role="listitem">
-            <div class="label">Condition</div>
-            <div class="value">${wc.t} ${wc.e}</div>
-          </div>
-          <div class="item" role="listitem">
-            <div class="label">Feels like</div>
-            <div class="value">${Math.round(w.feelsLike)}°C</div>
-          </div>
-          <div class="item" role="listitem">
-            <div class="label">Wind</div>
-            <div class="value">${w.windSpeed.toFixed(1)} km/h</div>
-          </div>
-          <div class="item" role="listitem">
-            <div class="label">Direction</div>
-            <div class="value">${Math.round(w.windDirection)}° (${cardinal})</div>
-          </div>
-          <div class="item" role="listitem">
-            <div class="label">Humidity</div>
-            <div class="value">${Math.round(w.humidity)}%</div>
-          </div>
-          <div class="item" role="listitem">
-            <div class="label">Local time</div>
-            <div class="value">${fmtLocalISO(w.time)}</div>
-          </div>
-        </div>
-
-        <div class="advice">${advice}</div>
-      `;
-    }
-
-    function setLoading(isLoading){
-      submitBtn.disabled = isLoading;
-      submitBtn.textContent = isLoading ? 'Checking…' : 'Check';
-    }
-
-    form.addEventListener('submit', async (e)=>{
-      e.preventDefault();
-      const q = input.value.trim();
-      if(!q){
-        renderStatus('Please enter a city or place.');
-        return;
-      }
-      setLoading(true);
-      renderStatus('Fetching weather. Please wait…');
-      try{
-        const place = await geocodePlace(q);
-        const weather = await getWeather(place.lat, place.lon, place.timezone);
-        renderWeather(place, weather);
-      }catch(err){
-        renderStatus(err.message || 'Something went wrong. Try again.', true);
-      }finally{
-        setLoading(false);
-      }
-    });
-
-    // Optional: prefill an example city
-    window.addEventListener('DOMContentLoaded', ()=>{
-      input.value = 'Melbourne';
+        if (next) {
+          panel.hidden = false;
+          const full = panel.scrollHeight;
+          panel.style.maxHeight = full + "px";
+        } else {
+          panel.style.maxHeight = "0";
+          panel.addEventListener(
+            "transitionend",
+            () => {
+              if (btn.getAttribute("aria-expanded") === "false") {
+                panel.hidden = true;
+              }
+            },
+            { once: true }
+          );
+        }
+      });
     });
   </script>
 </body>
