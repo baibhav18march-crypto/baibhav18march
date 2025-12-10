@@ -1,0 +1,128 @@
+:root{
+  --bg: #0f172a;
+  --card-bg: #020617;
+  --tile-bg: #0b1120;
+  --tile-border: #1f2937;
+  --tile-hover: #111827;
+  --accent: #38bdf8;
+  --accent-soft: rgba(56,189,248,0.15);
+  --text-main: #e5e7eb;
+  --text-sub: #9ca3af;
+  --sidebar-bg: #071127;
+  --danger: #ef4444;
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: system-ui, -apple-system, "Segoe UI", "Roboto", sans-serif;
+  background: radial-gradient(circle at top, #0f172a 0, #020617 55%);
+  color:var(--text-main);
+  min-height:100vh;
+}
+
+/* App shell layout */
+.app-shell{
+  display:flex;
+  gap:20px;
+  padding:18px;
+  align-items:flex-start;
+}
+
+/* Sidebar */
+.sidebar{
+  width:220px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:12px;
+  padding:16px;
+  border:1px solid rgba(148,163,184,0.06);
+  background-color:var(--sidebar-bg);
+  display:flex;
+  flex-direction:column;
+  height:calc(100vh - 36px);
+  position:sticky;
+  top:18px;
+}
+
+.brand{font-size:1.25rem;margin-bottom:6px}
+.greeting{font-size:0.9rem;color:var(--text-sub);margin-bottom:8px}
+
+.menu{flex:1; overflow:auto; padding-right:6px}
+.menu-title{font-size:0.85rem;color:var(--text-sub);margin-bottom:8px}
+.menu ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.menu a{
+  display:block;
+  text-decoration:none;
+  color:var(--text-main);
+  font-size:0.95rem;
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid transparent;
+}
+.menu a:hover{background:rgba(255,255,255,0.02);border-color:rgba(56,189,248,0.12)}
+
+/* Sidebar bottom */
+.sidebar-bottom{margin-top:12px}
+.btn{cursor:pointer;border:0;padding:8px 12px;border-radius:8px;font-weight:600}
+.btn.primary{background:var(--accent);color:#022}
+.btn.danger{background:var(--danger);color:white}
+
+/* Main content area */
+.main-content{
+  flex:1;
+  max-width:calc(100% - 260px);
+}
+
+.page{
+  width:100%;
+  max-width:1200px;
+  background:var(--card-bg);
+  border-radius:18px;
+  border:1px solid rgba(148,163,184,0.14);
+  box-shadow:0 20px 40px rgba(15,23,42,0.55);
+  padding:22px;
+}
+
+/* header */
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:18px;border-bottom:1px solid rgba(148,163,184,0.12);padding-bottom:10px}
+header h1{font-size:1.4rem;letter-spacing:0.06em}
+header p{color:var(--text-sub)}
+
+/* tile grid (copied/preserved) */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:6px}
+.task-tile{display:block;text-decoration:none;background:var(--tile-bg);border-radius:14px;border:1px solid var(--tile-border);padding:12px;color:var(--text-main);position:relative;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+.task-label{font-size:0.92rem;font-weight:600;display:flex;align-items:center;justify-content:space-between;gap:4px}
+.task-chip{font-size:0.78rem;padding:1px 7px;border-radius:999px;background:rgba(15,23,42,0.85);color:var(--text-sub);border:1px solid rgba(148,163,184,0.3)}
+.task-meta{font-size:0.78rem;color:var(--text-sub);margin-top:3px}
+.task-tile:hover{transform:translateY(-2px);background:var(--tile-hover);border-color:rgba(56,189,248,0.5);box-shadow:0 14px 30px rgba(15,23,42,0.6)}
+
+@media (max-width:900px){
+  .app-shell{flex-direction:column;padding:12px}
+  .sidebar{width:100%;height:auto;position:relative}
+  .main-content{max-width:100%}
+}
+
+/* Login / Auth page styles */
+.auth-page{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+  height:100vh;
+}
+.auth-card{
+  background:var(--card-bg);
+  padding:28px;
+  width:360px;
+  border-radius:12px;
+  border:1px solid rgba(148,163,184,0.08);
+  box-shadow:0 20px 40px rgba(2,6,23,0.6);
+  text-align:left;
+}
+.auth-card h1{margin-bottom:6px}
+.muted{color:var(--text-sub)}
+.login-form{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.login-form label{display:flex;flex-direction:column;gap:6px;font-size:0.9rem}
+.login-form input{padding:10px;border-radius:8px;border:1px solid rgba(148,163,184,0.06);background:transparent;color:var(--text-main)}
+.small{font-size:0.8rem}

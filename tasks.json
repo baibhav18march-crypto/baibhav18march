@@ -1,0 +1,16 @@
+{
+  "tasks": [
+    { "id": 1, "label": "Task 1", "subtitle": "Portfolio", "src": "./Lab experiement/Task 1/index.html" },
+    { "id": 2, "label": "Task 2", "subtitle": "", "src": "./Lab experiement/Task 2/index.html" },
+    { "id": 3, "label": "Task 3", "subtitle": "", "src": "./Lab experiement/Task 3/index.html" },
+    { "id": 4, "label": "Task 4", "subtitle": "", "src": "./Lab experiement/Task 4/index.html" },
+    { "id": 5, "label": "Task 5", "subtitle": "", "src": "./Lab experiement/Task 5/index.html" },
+    { "id": 6, "label": "Task 6", "subtitle": "", "src": "./Lab experiement/Task 6/index.html" },
+    { "id": 7, "label": "Task 7", "subtitle": "", "src": "./Lab experiement/Task 7/index.html" },
+    { "id": 8, "label": "Task 8", "subtitle": "", "src": "./Lab experiement/Task 8/index.html" },
+    { "id": 9, "label": "Task 9", "subtitle": "", "src": "./Lab experiement/Task 9/index.html" },
+    { "id": 10, "label": "Task 10", "subtitle": "", "src": "./Lab experiement/Task 10/index.html" },
+    { "id": 11, "label": "Task 11", "subtitle": "", "src": "./Lab experiement/Task 11/index.html" },
+    { "id": 12, "label": "Task 12", "subtitle": "", "src": "./Lab experiement/Task 12/index.html" }
+  ]
+}

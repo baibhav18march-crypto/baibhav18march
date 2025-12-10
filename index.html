@@ -1,314 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Lab Tasks</title>
-
-  <style>
-    :root {
-      --bg: #020617;
-      --card-bg: #020617;
-      --tile-bg: #0b1120;
-      --tile-border: #1f2937;
-      --tile-hover: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.15);
-      --text-main: #e5e7eb;
-      --text-sub: #9ca3af;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 55%);
-      color: var(--text-main);
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px 16px;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 1000px;
-      background: var(--card-bg);
-      border-radius: 18px;
-      border: 1px solid rgba(148,163,184,0.14);
-      box-shadow: 0 20px 40px rgba(15,23,42,0.55);
-      padding: 22px 20px 24px;
-    }
-
-    header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-      border-bottom: 1px solid rgba(148,163,184,0.25);
-      padding-bottom: 10px;
-    }
-
-    header h1 {
-      font-size: clamp(1.4rem, 3vw, 1.8rem);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    header p {
-      font-size: 0.9rem;
-      color: var(--text-sub);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* responsive tiles [web:68][web:95] */
-      gap: 14px;
-      margin-top: 6px;
-    }
-
-    /* Make each link a tile/card */
-    .task-tile {
-      display: block;
-      text-decoration: none;
-      background: var(--tile-bg);
-      border-radius: 14px;
-      border: 1px solid var(--tile-border);
-      padding: 12px 12px 11px;
-      color: var(--text-main);
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-    }
-
-    .task-tile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, var(--accent-soft), transparent 55%);
-      opacity: 0;
-      transition: opacity 0.15s ease;
-      pointer-events: none;
-    }
-
-    .task-label {
-      font-size: 0.92rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
-    }
-
-    .task-label span {
-      max-width: 90%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .task-chip {
-      font-size: 0.78rem;
-      padding: 1px 7px;
-      border-radius: 999px;
-      background: rgba(15,23,42,0.85);
-      color: var(--text-sub);
-      border: 1px solid rgba(148,163,184,0.3);
-    }
-
-    .task-meta {
-      font-size: 0.78rem;
-      color: var(--text-sub);
-      margin-top: 3px;
-    }
-
-    .task-tile:hover {
-      transform: translateY(-2px);
-      background: var(--tile-hover);
-      border-color: rgba(56,189,248,0.5);
-      box-shadow: 0 14px 30px rgba(15,23,42,0.6);
-    }
-
-    .task-tile:hover::before {
-      opacity: 1;
-    }
-
-    /* Accessible focus state [web:94][web:99][web:101] */
-    .task-tile:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 2px;
-      box-shadow: 0 0 0 3px rgba(56,189,248,0.55);
-    }
-
-    @media (max-width: 640px) {
-      .page {
-        padding: 18px 14px 20px;
-      }
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login — Lab Tasks</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="page">
-    <header>
-      <h1>My HTML & CSS Lab</h1>
-      <p>Click any tile to open that page in a new tab.</p>
-    </header>
+<body class="auth-page">
+  <main class="auth-card">
+    <h1>Welcome — Login</h1>
+    <p class="muted">Sign in to access your lab tasks</p>
 
-    <div class="grid">
-      <a class="task-tile" target="_blank" href="./demo1.html">
-        <div class="task-label">
-          <span>My Information</span>
-          <span class="task-chip">Demo</span>
-        </div>
-        <div class="task-meta">Basic personal info page</div>
-      </a>
+    <form id="loginForm" class="login-form" autocomplete="off">
+      <label>
+        <span>Username</span>
+        <input id="username" name="username" type="text" placeholder="Enter username" required />
+      </label>
 
-      <a class="task-tile" target="_blank" href="./demo4.html">
-        <div class="task-label">
-          <span>Table</span>
-          <span class="task-chip">Demo</span>
-        </div>
-        <div class="task-meta">HTML table layout</div>
-      </a>
+      <label>
+        <span>Password</span>
+        <input id="password" name="password" type="password" placeholder="Enter password" required />
+      </label>
 
-      <a class="task-tile" target="_blank" href="./demo3.html">
-        <div class="task-label">
-          <span>CSS Styles</span>
-          <span class="task-chip">Demo</span>
-        </div>
-        <div class="task-meta">CSS practice page</div>
-      </a>
+      <button type="submit" class="btn primary">Login</button>
 
-      <a class="task-tile" target="_blank" href="./demo7.html">
-        <div class="task-label">
-          <span>Portfolio</span>
-          <span class="task-chip">Demo</span>
-        </div>
-        <div class="task-meta">Simple portfolio layout</div>
-      </a>
+      <p class="muted small">Tip: any non-empty credentials will log you in (demo).</p>
+    </form>
+  </main>
 
-      <a class="task-tile" target="_blank" href="./demo8.html">
-        <div class="task-label">
-          <span>Registration Form</span>
-          <span class="task-chip">Form</span>
-        </div>
-        <div class="task-meta">User registration page</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task1/index.html">
-        <div class="task-label">
-          <span>Task 1</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 1</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task2/index.html">
-        <div class="task-label">
-          <span>Task 2</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 2</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task3/index.html">
-        <div class="task-label">
-          <span>Task 3</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 3</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./travelblog.html">
-        <div class="task-label">
-          <span>Travel Blog</span>
-          <span class="task-chip">Project</span>
-        </div>
-        <div class="task-meta">Travel blog page</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task4/index.html">
-        <div class="task-label">
-          <span>Task 4</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 4</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task5/index.html">
-        <div class="task-label">
-          <span>Task 5</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 5</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 6/index.html">
-        <div class="task-label">
-          <span>Task 6</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 6</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 7/index.html">
-        <div class="task-label">
-          <span>Task 7</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 7</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 8/index.html">
-        <div class="task-label">
-          <span>Task 8</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 8</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 9/index.html">
-        <div class="task-label">
-          <span>Task 9</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 9</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 10/index.html">
-        <div class="task-label">
-          <span>Task 10</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 10</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 11/index.html">
-        <div class="task-label">
-          <span>Task 11</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 11</div>
-      </a>
-
-      <a class="task-tile" target="_blank" href="./Lab experiement/Task 12/index.html">
-        <div class="task-label">
-          <span>Task 12</span>
-          <span class="task-chip">Lab</span>
-        </div>
-        <div class="task-meta">Experiment Task 12</div>
-      </a>
-    </div>
-  </div>
+  <script src="app.js"></script>
 </body>
 </html>

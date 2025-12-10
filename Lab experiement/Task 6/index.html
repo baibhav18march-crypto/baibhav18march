@@ -1,35 +1,304 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Personalized Greeting</title>
-  <link rel="stylesheet" href="style6.css">
+  <meta charset="utf-8" />
+  <title>Greeting App — Single Theme Toggle</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      /* default (dark) tokens */
+      --bg: #0b1220;
+      --card: #0f1724;
+      --text: #e6eef8;
+      --muted: #9aa8bd;
+      --accent: #38bdf8;
+      --accent-contrast: #062e46;
+      --radius: 12px;
+    }
+
+    /* Light theme */
+    :root[data-theme="light"] {
+      --bg: #f7f9fb;
+      --card: #ffffff;
+      --text: #0b1220;
+      --muted: #4b5563;
+      --accent: #0ea5e9;
+      --accent-contrast: #dbeff9;
+    }
+
+    /* Blue theme */
+    :root[data-theme="blue"] {
+      --bg: linear-gradient(180deg,#e6f0ff,#f8fbff);
+      --card: #eaf4ff;
+      --text: #04243a;
+      --muted: #18536b;
+      --accent: #2563eb;
+      --accent-contrast: #e7f0ff;
+    }
+
+    /* Green theme */
+    :root[data-theme="green"] {
+      --bg: linear-gradient(180deg,#ecfdf5,#f7fff8);
+      --card: #e9fff0;
+      --text: #04321a;
+      --muted: #2f6b4b;
+      --accent: #16a34a;
+      --accent-contrast: #dff7e4;
+    }
+
+    /* basics */
+    * { box-sizing: border-box; transition: background-color 220ms ease, color 200ms ease; }
+    html,body { height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    body {
+      background: var(--bg);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:var(--text);
+    }
+
+    .app {
+      width:100%;
+      max-width:760px;
+      background:var(--card);
+      border-radius:16px;
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.12);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    header { display:flex; gap:12px; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    .title { font-size:1.2rem; font-weight:600; margin:0; }
+    .subtitle { margin:0; color:var(--muted); font-size:0.9rem; }
+
+    /* Single toggle */
+    .theme-toggle {
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+    }
+    .toggle-btn {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:transparent;
+      border:1px solid rgba(0,0,0,0.06);
+      cursor:pointer;
+      color:var(--text);
+      font-size:0.95rem;
+    }
+    .toggle-btn:focus { outline:3px solid var(--accent-contrast); outline-offset:3px; }
+    .toggle-swatch {
+      width:18px; height:18px; border-radius:50%; box-shadow:inset 0 0 0 2px rgba(255,255,255,0.06);
+      flex-shrink:0;
+    }
+
+    /* Form */
+    form { display:grid; gap:12px; margin-top:6px; }
+    label { display:block; font-size:0.9rem; color:var(--muted); }
+    .row { display:flex; gap:12px; }
+    input[type="text"], select {
+      padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.06);
+      background:transparent; color:var(--text); min-width:0;
+    }
+    button[type="submit"] {
+      padding:10px 14px; border-radius:10px; border:0; cursor:pointer;
+      background:var(--accent); color:var(--accent-contrast); font-weight:600;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.12);
+    }
+    button[type="submit"]:active { transform:translateY(1px); }
+
+    /* Message area */
+    #message {
+      margin-top:12px;
+      padding:12px;
+      border-radius:10px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(255,255,255,0.02));
+      color:var(--text);
+      opacity:0;
+      transform:translateY(6px);
+      transition: opacity 260ms ease, transform 260ms ease;
+      font-weight:600;
+    }
+    #message.show { opacity:1; transform:translateY(0); }
+
+    /* swatch gradients for each theme */
+    .sw-dark { background: linear-gradient(135deg,#60a5fa,#38bdf8); }
+    .sw-light { background: linear-gradient(135deg,#ffd166,#fca311); }
+    .sw-blue { background: linear-gradient(135deg,#7dd3fc,#2563eb); }
+    .sw-green { background: linear-gradient(135deg,#86efac,#16a34a); }
+
+    @media (max-width:520px){
+      .row { flex-direction:column; }
+      header { flex-direction:column; align-items:flex-start; gap:8px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Welcome! Enter your details:</h2>
-    <form id="greetForm">
-      <label>
-        Name: <input type="text" id="nameInput" required>
-      </label>
-      <label>
-        Mood:
-        <select id="moodInput" required>
-          <option value="default">Choose...</option>
-          <option value="happy">Happy</option>
-          <option value="sad">Sad</option>
-          <option value="excited">Excited</option>
-          <option value="tired">Tired</option>
-        </select>
-      </label>
-      <button type="submit">Greet me!</button>
+  <main class="app" role="main">
+    <header>
+      <div>
+        <h1 class="title">Greeting App</h1>
+        <p class="subtitle">Enter your name and mood — use the theme toggle to change color.</p>
+      </div>
+
+      <div class="theme-toggle" role="toolbar" aria-label="Theme cycle toggle">
+        <span id="themeLabel" style="color:var(--muted); font-size:0.9rem;">Theme: <strong id="themeName">Dark</strong></span>
+        <button id="themeToggle" class="toggle-btn" aria-pressed="false" title="Cycle theme (Dark → Light → Blue → Green)">
+          <span id="swatch" class="toggle-swatch sw-dark" aria-hidden="true"></span>
+          <span id="toggleText">Cycle</span>
+        </button>
+      </div>
+    </header>
+
+    <form id="greetForm" aria-describedby="message">
+      <div class="row">
+        <label style="flex:1">
+          Name
+          <input id="nameInput" type="text" placeholder="Your name" required />
+        </label>
+
+        <label style="width:180px">
+          Mood
+          <select id="moodInput" aria-label="Select your mood">
+            <option value="">(choose)</option>
+            <option value="happy">Happy</option>
+            <option value="sad">Sad</option>
+            <option value="excited">Excited</option>
+            <option value="tired">Tired</option>
+          </select>
+        </label>
+
+        <div style="display:flex;align-items:flex-end">
+          <button type="submit">Greet</button>
+        </div>
+      </div>
     </form>
-    <div id="message" class="message">
-      <!-- Dynamic greeting will appear here -->
-    </div>
-  </div>
-  <script src="app.js"></script>
+
+    <div id="message" role="status" aria-live="polite"></div>
+  </main>
+
+  <script>
+    (function () {
+      // Greeting logic (your original)
+      const form = document.getElementById('greetForm');
+      const nameInput = document.getElementById('nameInput');
+      const moodInput = document.getElementById('moodInput');
+      const msgEl = document.getElementById('message');
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = nameInput.value.trim() || 'friend';
+        const mood = moodInput.value;
+
+        // Time-based greeting
+        const hour = new Date().getHours();
+        let timeGreet;
+        if (hour < 12) timeGreet = 'Good morning';
+        else if (hour < 18) timeGreet = 'Good afternoon';
+        else timeGreet = 'Good evening';
+
+        // Mood additions
+        let moodMsg;
+        switch (mood) {
+          case 'happy': moodMsg = "It's great to see you cheerful!"; break;
+          case 'sad': moodMsg = "Hope your day gets brighter."; break;
+          case 'excited': moodMsg = "Let's channel that excitement!"; break;
+          case 'tired': moodMsg = "Take some rest – you deserve it."; break;
+          default: moodMsg = '';
+        }
+
+        // Build final message
+        const message = `${timeGreet}, ${name}! ${moodMsg}`;
+
+        // Show message with animation
+        msgEl.textContent = message;
+        msgEl.classList.remove('show');
+        setTimeout(() => msgEl.classList.add('show'), 50);
+      });
+
+      // Theme toggle (single button cycles through 4 themes)
+      const THEME_KEY = 'greeting-app-theme';
+      const root = document.documentElement;
+      const toggle = document.getElementById('themeToggle');
+      const swatch = document.getElementById('swatch');
+      const themeNameEl = document.getElementById('themeName');
+      const themeOrder = ['dark', 'light', 'blue', 'green']; // cycle order
+
+      function setVisualForTheme(theme) {
+        // Update DOM (data-theme, swatch gradient, label)
+        if (!theme || theme === 'dark') {
+          root.removeAttribute('data-theme');
+          swatch.className = 'toggle-swatch sw-dark';
+          themeNameEl.textContent = 'Dark';
+          toggle.setAttribute('aria-pressed', 'false');
+        } else {
+          root.setAttribute('data-theme', theme);
+          themeNameEl.textContent = theme[0].toUpperCase() + theme.slice(1);
+          toggle.setAttribute('aria-pressed', 'true');
+          // swap swatch class
+          swatch.className = 'toggle-swatch ' + (theme === 'light' ? 'sw-light' : theme === 'blue' ? 'sw-blue' : 'sw-green');
+        }
+      }
+
+      function saveTheme(theme) {
+        try { localStorage.setItem(THEME_KEY, theme || 'dark'); } catch (e) {}
+      }
+
+      function loadTheme() {
+        try {
+          const stored = localStorage.getItem(THEME_KEY);
+          if (stored) return stored;
+        } catch (e) {}
+        // fallback to system preference
+        const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+        return prefersLight ? 'light' : 'dark';
+      }
+
+      function getNextTheme(current) {
+        const idx = themeOrder.indexOf(current);
+        // if not found, default to 0 (dark)
+        const next = idx === -1 ? 0 : (idx + 1) % themeOrder.length;
+        return themeOrder[next];
+      }
+
+      // initialize theme
+      let currentTheme = loadTheme();
+      setVisualForTheme(currentTheme);
+
+      // cycle on click
+      toggle.addEventListener('click', () => {
+        currentTheme = getNextTheme(currentTheme);
+        setVisualForTheme(currentTheme);
+        saveTheme(currentTheme);
+      });
+
+      // keyboard support
+      toggle.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+
+      // listen for system preference change only if user hasn't chosen explicitly
+      const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)');
+      if (mq && mq.addEventListener) {
+        mq.addEventListener('change', (e) => {
+          try {
+            if (!localStorage.getItem(THEME_KEY)) {
+              currentTheme = e.matches ? 'light' : 'dark';
+              setVisualForTheme(currentTheme);
+            }
+          } catch (err) {}
+        });
+      }
+
+    })();
+  </script>
 </body>
 </html>
-    
-     
